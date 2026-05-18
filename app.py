@@ -1,6 +1,5 @@
 """
-StudyAI — Study Question Generator (offline, no API key).
-Deploy-ready for Streamlit Cloud.
+StudyAI — Study Question Generator.
 """
 
 import streamlit as st

@@ -2,7 +2,7 @@
 
 A modern SaaS-style web app built with **Python** and **Streamlit**. Generate MCQs, short-answer questions, and True/False items on any topic—with explanations and export tools.
 
-**No API key required** — works fully offline by default. Optional OpenAI integration if you add a key.
+**Powered by OpenAI API** — generates study questions using your API key.
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-red)
@@ -11,8 +11,7 @@ A modern SaaS-style web app built with **Python** and **Streamlit**. Generate MC
 
 - **Authentication** — Login, signup, logout; users stored in `users.json`; duplicate usernames blocked
 - **Dashboard** — Topic, difficulty (Easy / Medium / Hard), question count, question type
-- **Offline generator** — Built-in question banks (Python, math, science, history) + smart templates
-- **Optional OpenAI** — Enable in sidebar if you add an API key
+- **OpenAI API** — AI-generated questions, options, answers, and explanations
 - **UI** — Dark theme, cards, sidebar profile, loading animation, success/error messages
 - **Extras** — Copy all, download TXT, clear results, session topic history, saved generations
 
@@ -39,7 +38,7 @@ study-ai/
 ### 1. Prerequisites
 
 - Python 3.9 or newer
-- No API key needed (optional [OpenAI key](https://platform.openai.com/api-keys) for AI mode)
+- [OpenAI API key](https://platform.openai.com/api-keys)
 
 ### 2. Install dependencies
 

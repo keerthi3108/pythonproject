@@ -18,7 +18,6 @@ def inject_css(css: str) -> None:
 
 
 def render_navbar(title: str, subtitle: str = "") -> None:
-    """Top header bar — no empty wrappers."""
     sub_html = f'<div class="tagline">{html.escape(subtitle)}</div>' if subtitle else ""
     st.markdown(
         f"""
@@ -34,7 +33,6 @@ def render_navbar(title: str, subtitle: str = "") -> None:
 
 
 def render_sidebar() -> str:
-    """Sidebar: profile, stats, nav, history. Returns selected page key."""
     username = st.session_state.username or "User"
     topics_count = len(st.session_state.history)
     questions_count = st.session_state.total_questions_count
@@ -89,14 +87,12 @@ def render_sidebar() -> str:
                 )
 
         st.markdown("---")
-        st.caption("✅ Offline · No API key required")
         st.caption("StudyAI v2.0")
 
     return page
 
 
 def _password_field(label: str, key: str, show_key: str) -> str:
-    """Password input with show/hide toggle."""
     show = st.checkbox("Show password", key=show_key, value=False)
     return st.text_input(
         label,
@@ -107,7 +103,7 @@ def _password_field(label: str, key: str, show_key: str) -> str:
 
 
 def render_auth_screen() -> None:
-    render_navbar("🧠 StudyAI", "Study question generator — no API key required")
+    render_navbar("🧠 StudyAI", "Smart study question generator")
 
     _, col, _ = st.columns([1, 1.2, 1])
     with col:
@@ -149,7 +145,6 @@ def render_auth_screen() -> None:
 
 
 def render_question_card(index: int, question: dict, key_prefix: str) -> None:
-    """Question card with options, expander, per-question copy."""
     q_text = html.escape(str(question.get("question", "N/A")))
     options = question.get("options") or []
     opts_html = ""
@@ -183,7 +178,6 @@ def render_question_card(index: int, question: dict, key_prefix: str) -> None:
 
 
 def execute_generation(topic: str, difficulty: str, num_q: int, q_type: str) -> bool:
-    """Generate questions offline — no API required."""
     st.session_state.gen_error = None
     st.session_state.gen_success = None
 
@@ -217,7 +211,6 @@ def execute_generation(topic: str, difficulty: str, num_q: int, q_type: str) -> 
 
 
 def render_results_section() -> None:
-    """Show generated questions and action buttons."""
     questions = st.session_state.generated_questions
     if not questions:
         return
@@ -272,7 +265,6 @@ def render_dashboard() -> None:
     if st.session_state.gen_success:
         st.success(st.session_state.gen_success)
 
-    # Handle "Generate again" from results
     if st.session_state.pending_generate:
         st.session_state.pending_generate = False
         execute_generation(
@@ -290,7 +282,7 @@ def render_dashboard() -> None:
             topic = st.text_input(
                 "Topic",
                 value=st.session_state.last_topic,
-                placeholder="e.g. Photosynthesis, Python loops",
+                placeholder="e.g. Photosynthesis, Java loops",
             )
         with c2:
             difficulty = st.selectbox(
@@ -309,7 +301,7 @@ def render_dashboard() -> None:
                 min_value=1,
                 max_value=20,
                 value=min(int(st.session_state.last_num_questions), 5),
-                help="Generate up to 20 questions — works offline, no API needed.",
+                help="Generate up to 20 questions per topic.",
             )
         with c4:
             q_type = st.selectbox(
@@ -343,7 +335,7 @@ def render_dashboard() -> None:
         elif num_q < 1 or num_q > 20:
             st.warning("Number of questions must be between 1 and 20.")
         else:
-            ok = execute_generation(topic_clean, difficulty, int(num_q), q_type)
+            execute_generation(topic_clean, difficulty, int(num_q), q_type)
             st.rerun()
 
     render_results_section()
