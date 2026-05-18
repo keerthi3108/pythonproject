@@ -27,7 +27,7 @@ study-ai/
 ├── utils.py            # Optional OpenAI API + export helpers
 ├── ui_styles.py        # Global CSS theme
 ├── users.json          # User database
-├── .env                # Local API key (not committed)
+├── .env                # Local API key 
 ├── .env.example        # Sample env file
 ├── requirements.txt
 ├── .streamlit/config.toml
